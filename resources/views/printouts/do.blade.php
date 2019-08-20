@@ -6,7 +6,7 @@
 @foreach($parts as $part)
 	
 	@if($loop->first == true)
-		@include('printouts._header')
+		@include('printouts._header_do')
 	@endif
 	
 	<tr>
@@ -20,10 +20,10 @@
 
 
 	@if($loop->iteration % 8 == 0)
-		@include('printouts._footer')
+		@include('printouts._footer_do')
 		<div class="page-break"></div>
 		<?php $page++; ?>
-		@include('printouts._header')
+		@include('printouts._header_do')
 	@endif
 
 	@if($loop->last == true)
@@ -31,7 +31,7 @@
 			<td colspan="5" align="right"><strong>Sub Total (RM)</strong></td>
 			<td align="right"><strong>{{ $data['repair']->grandTotal }}</strong></td>
 		</tr>
-		@include('printouts._footer')
+		@include('printouts._footer_do')
 	@endif
 
 

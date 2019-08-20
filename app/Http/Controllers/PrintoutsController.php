@@ -31,6 +31,7 @@ class PrintoutsController extends Controller
     }
 
     public function do($id) {
+
         $repair = Repair::find($id);
         // dd($repair);
 
@@ -44,7 +45,7 @@ class PrintoutsController extends Controller
 
         $parts = $repair->rparts->toArray();
 
-        $pdf = PDF::loadView('printouts.invoice', compact('data', 'pages', 'parts', 'printouts_title'))->setPaper('a4');
+        $pdf = PDF::loadView('printouts.do', compact('data', 'pages', 'parts', 'printouts_title'))->setPaper('a4');
         return $pdf->download($repair->car->owner . ' - ' . $repair->car->plateNo . $repair->dateIn . '.pdf');
 
         return view('printouts.invoice', ['data' => $data, 'pages' => $pages, 'parts' => $parts]);

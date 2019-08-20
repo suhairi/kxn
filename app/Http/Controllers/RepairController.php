@@ -9,6 +9,7 @@ use App\Invoice;
 use App\Rparts;
 use Session;
 use Carbon\Carbon;
+use App\Do;
 
 class RepairController extends Controller
 {
@@ -63,11 +64,18 @@ class RepairController extends Controller
         $invoice_no = Invoice::max('invoice_no');
         $invoice_no++;
 
-
         $invoice                = new Invoice;
         $invoice->repair_id     = $repair->id;
         $invoice->invoice_no    = $invoice_no;
         $invoice->save();
+
+        $do_no = Invoice::max('do_no');
+        $do_no++;
+
+        $do             = new Do;
+        $do->repair_id  = $repair->id;
+        $do->do_no      = $do_no;
+        $do->save();
 
         // Stripping out null values from dynamic form
 

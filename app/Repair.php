@@ -1,9 +1,10 @@
 <?php
 
 namespace App;
-use Carbon\Carbon;
+
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Repair extends Model
 {
@@ -29,6 +30,12 @@ class Repair extends Model
     public function invoice() {
         return $this->hasOne('App\Invoice');
     }
+
+    public function do() {
+        return $this->hasOne('App\Do');
+    }
+
+    
 
 
 }
