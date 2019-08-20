@@ -28,11 +28,10 @@
 
 	    	<div class="card-body">
 	    		<div class="form-group row">
-	    			<table class="table table-borderless">
+	    			<table class="table table-bordered table-striped">
 	    				<thead class="thead-dark">
 	    					<th>Bil</th>
 	    					<th>Date</th>
-	    					<th>Grand Total (RM)</th>
 	    					<th>Status</th>
 	    					<th>Details</th>
 	    					<th>Options</th>
@@ -42,44 +41,47 @@
 	    					<tr>
 	    						<td>{{ $loop->iteration }}</td>
 	    						<td>
-	    							<a href="{{ route('repair.edit', $repair->id) }}"> {{ Carbon\Carbon::parse($repair->dateIn)->format('d-m-Y') }} 
+	    							<a href="{{ route('repair.edit', $repair->id) }}" title="Edit Invoice" class="disabled"> {{ Carbon\Carbon::parse($repair->dateIn)->format('d-m-Y') }} 
 	    							- {{ Carbon\Carbon::parse($repair->dateIn)->format('D') }}</a>
 	    							<br />
 	    							{{ $repair->car->owner }} <br />
-	    							{{ $repair->car->plateNo }}
+	    							{{ $repair->car->plateNo }} <br />
+	    							Invoice No. : {{ $repair->invoice->invoice_no }}
 	    						</td>
-	    						<td>{{ $repair->grandTotal }}</td>
-	    						<td>
+	    						<td align="center">
 	    							@if($repair->status == 'PENDING')
 	    								<font color="red"><strong>{{ $repair->status }}</strong></font>
     								@else
-    									<font color="green">{{ $repair->status }}</font>
+    									<font color="green">{{ $repair->status }} / PAID</font>
 									@endif
+									<br />
+	    							<strong>RM {{ $repair->grandTotal }}</strong>
+	    							
 
 	    						</td>
 	    						<td>
-	    							<table class="table table-striped">
-	    								<thead>
+	    							<table class="table table-striped table-bordered">
+	    								<thead class="thead-dark">
 	    									<th>Bil</th>
 	    									<th>Item Name</th>
-	    									<th>Quantity</th>
-	    									<th>Price</th>
+	    									<th>Quantity (Unit)</th>
+	    									<th>Price (RM)</th>
 	    									<th><strong>Total (RM)</strong></th>
 	    								</thead>
 	    								@foreach($repair->rparts as $rpart)
 	    									<tr>
 	    										<td>{{ $loop->iteration }}</td>
 	    										<td>{{ $rpart->name }}</td>
-	    										<td>{{ $rpart->quantity }}</td>
-	    										<td>{{ $rpart->price }}</td>
-	    										<td>{{ $rpart->total }}</td>
+	    										<td align="center">{{ $rpart->quantity }}</td>
+	    										<td align="right">{{ $rpart->price }}</td>
+	    										<td align="right">{{ $rpart->total }}</td>
 	    									</tr>
 	    								@endforeach
 	    							</table>	    							
 	    						</td>
 	    						<td align="center">
 	    							<a href="{{ route('printouts.invoice', $repair->id) }}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print Invoice"></i></a>
-		    							<a href="#" class="btn btn-warning" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print D.O"></i></a>
+		    							<a href="{{ route('printouts.do', $repair->id) }}" class="btn btn-warning" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print D.O"></i></a>
 	    						</td>
 	    					</tr>
 	    					@endforeach

@@ -53,7 +53,7 @@
 
 	                <span id="result"></span>
 	                    <table class="table table-bordered table-striped" id="user_table">
-			            <thead>
+			            <thead class="thead-dark">
 			            	<tr>
 			                	<th>Part/Item Name</th>
 			                    <th>Quantity (Unit)</th>

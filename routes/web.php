@@ -41,7 +41,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/search', 'SearchController@show')->name('search.search');
 
 	// Printouts
-	Route::get('/printouts/{id}', 'PrintoutsController@invoice')->name('printouts.invoice');
+	Route::get('/printouts/invoice/{id}', 'PrintoutsController@invoice')->name('printouts.invoice');
+	Route::get('/printouts/do/{id}', 'PrintoutsController@do')->name('printouts.do');
 
 });
 

@@ -14,7 +14,7 @@
 	    		@include('layouts._ifSuccess')
 	    		
 	    		<table class="table table-bordered">
-	    			<thead>
+	    			<thead class="thead-dark">
 	    				<tr>
 	    					<th>Bil</th>
 	    					<th>Customer's Name</th>
@@ -30,6 +30,7 @@
 	    						<td>
 	    							<strong>{{ $repair->car->owner }}</strong> <br />
 	    							{{ $repair->car->plateNo }}	<br />
+	    							Invoice No. : {{ $repair->invoice->invoice_no }} <br />
 	    							<strong>RM {{ $repair->grandTotal }} </strong> <br />
 	    							@if($repair->status == 'PENDING')
 	    								<font color="red">PAYMENT : {{ $repair->status}}</font>
@@ -42,19 +43,19 @@
 	    							<strong>Date Out : </strong>{{ Carbon\Carbon::parse($repair->dateOut)->format('d-m-Y - D') }}
 	    						</td>
 	    						<td>
-	    							<table class="table">
+	    							<table class="table table-bordered table-striped">
 	    								<thead>
 	    									<th>Item Name</th>
 	    									<th>Quantity</th>
-	    									<th>Price</th>
+	    									<th>Price (RM)</th>
 	    									<th><strong>Total (RM)</strong></th>
 	    								</thead>
 	    								@foreach($repair->rparts as $rpart)
 	    									<tr>
 	    										<td>{{ $rpart->name }}</td>
 	    										<td>{{ $rpart->quantity }}</td>
-	    										<td>{{ $rpart->price }}</td>
-	    										<td>{{ $rpart->total }}</td>
+	    										<td align="right">{{ $rpart->price }}</td>
+	    										<td align="right">{{ $rpart->total }}</td>
 	    									</tr>
 	    								@endforeach
 	    							</table>

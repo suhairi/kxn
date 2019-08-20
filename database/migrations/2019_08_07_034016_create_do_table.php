@@ -15,8 +15,9 @@ class CreateDoTable extends Migration
     {
         Schema::create('do', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('do_no');
             $table->integer('repair_id');
-            $table->date('date');
+            $table->dateTime('date')->nullable;
             // $table->timestamps();
         });
     }

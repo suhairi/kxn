@@ -40,14 +40,14 @@
 		<td>
 			<table class="table table-bordered" style="border-radius: 1px">
 				<tr>
-					<td align="center" colspan="2"><font size="4"><strong>Invoice</strong></font></td>
+					<td align="center" colspan="2"><font size="4"><strong>{{ strtoupper($printouts_title) }}</strong></font></td>
 				</tr>
 			</table>
 			<table class="table table-sm">
 				<tr>
 					<td><small>No </small></td>
 					<td>:</td>
-					<td align="center"><small></small></td>
+					<td align="center"><small>{{ $data['repair']->$printouts_title->$printouts_title_no }}</small></td>
 				</tr>
 				<tr>
 					<td><small>Date </small></td>
