@@ -17,7 +17,7 @@ class CreateInvoiceTable extends Migration
             $table->bigIncrements('id');
             $table->string('invoice_no');
             $table->integer('repair_id');
-            $table->dateTime('date');
+            $table->dateTime('date')->nullable();
             // $table->timestamps();
         });
     }

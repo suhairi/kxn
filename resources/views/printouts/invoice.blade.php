@@ -2,50 +2,41 @@
 
 <!-- restructure with checking $data['repair']->rparts has how many items -->
 <!-- and then coding from there wether to have how many page-breaks -->
-
-@for($i=1; $i<=$pages; $i++)
-	@include('printouts._header')
-
-	@foreach($data['repair']->rparts as $rpart)
-		<tr>
-			<td>{{ $loop->iteration }}</td>
-			<td>{{ $rpart->name }}</td>
-			<td>{{ $rpart->quantity }}</td>
-			<td align="center">-</td>
-			<td align="right">{{ $rpart->price }}</td>
-			<td align="right">{{ $rpart->total }}</td>
-		</tr>
-		@if($loop->iteration == 9)
-			@include('printouts._footer')
-			<div class="page-break">
-				
-			</div>
-			<tr>
-				<td colspan="6">here</td>
-			</tr>
-		@endif
-	@endforeach
-	@if(count($data['repair']->rparts) < 9)
-		@for($i=count($data['repair']->rparts) + 1; $i<9; $i++)
-			<tr>
-				<td>&nbsp;</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			
-		@endfor
+<?php $page = 1; ?>
+@foreach($parts as $part)
+	
+	@if($loop->first == true)
+		@include('printouts._header')
 	@endif
-	@include('printouts._footer')
-@endfor
+	
+	<tr>
+		<td>{{ $loop->iteration }}</td>
+		<td>{{ $part['name'] }}</td>
+		<td>{{ $part['quantity'] }}</td>
+		<td>-</td>
+		<td>{{ $part['price'] }}</td>
+		<td>{{ $part['total'] }}</td>
+	</tr>
 
+
+	@if($loop->iteration % 8 == 0)
+		@include('printouts._footer')
+		<div class="page-break"></div>
+		<?php $page++; ?>
+		@include('printouts._header')
+	@endif
+
+	@if($loop->last == true)
+		<tr>
+			<td colspan="5" align="right"><strong>Sub Total (RM)</strong></td>
+			<td align="right"><strong>{{ $data['repair']->grandTotal }}</strong></td>
+		</tr>
+		@include('printouts._footer')
+	@endif
 
 
 	
-	
+@endforeach
 
 
-					
 				

@@ -67,7 +67,7 @@
 				<tr>
 					<td><small>Page </small></td>
 					<td>:</td>
-					<td align="center"><small>1 of 2</small></td>
+					<td align="center"><small>{{ $page }} of {{ $pages }}</small></td>
 				</tr>				
 			</table>			
 		</td>

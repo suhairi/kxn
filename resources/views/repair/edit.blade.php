@@ -23,6 +23,12 @@
 	                  		{{ Form::select("status", ['PENDING' => 'PENDING', 'DELIVERED' => 'DELIVERED / PAID'], $repair->status, ['class' => 'form-control form-control-user', 'placeholder' => 'Select Status']) }}
 	                  	</div>
 	                </div>
+	                <div class="form-group row">
+	                  	<div class="col-sm-6 mb-3 mb-sm-0">
+	                  		<font color="#FF6347"><strong>{{ Form::label("Invoice No") }}</strong></font>
+	                  		{{ Form::text("invoice_no", $invoice_no, ['class' => 'form-control form-control-user', 'placeholder' => 'Invoice No.']) }}
+	                  	</div>
+	                </div>
 	                <hr />
       				<div class="form-group row">
 	                  	<div class="col-sm-6 mb-3 mb-sm-0">

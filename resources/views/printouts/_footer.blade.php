@@ -1,7 +1,3 @@
-	<tr>
-		<td colspan="5" align="right"><strong>Sub Total (RM)</strong></td>
-		<td align="right"><strong>{{ $data['repair']->grandTotal }}</strong></td>
-	</tr>
 </tbody>
 			</table>
 		</td>

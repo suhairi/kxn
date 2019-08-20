@@ -26,5 +26,9 @@ class Repair extends Model
         return $this->hasMany('App\Rparts');
     }
 
+    public function invoice() {
+        return $this->hasOne('App\Invoice');
+    }
+
 
 }

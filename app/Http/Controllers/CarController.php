@@ -88,7 +88,7 @@ class CarController extends Controller
         
         $car = Car::find($car);
 
-        return view('car.show')->with('car', $car);
+        return view('car.edit')->with('car', $car);
     }
 
     /**
@@ -103,7 +103,7 @@ class CarController extends Controller
 
         $validator = Validator::make($request->all(), [
             'owner' => 'required|max:255',
-            'plateNo' => 'required|unique:car,plateNo',
+            'plateNo' => 'required',
             'model' => 'nullable',
 
         ]);

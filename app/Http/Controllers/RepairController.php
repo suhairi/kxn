@@ -8,6 +8,7 @@ use App\Car;
 use App\Invoice;
 use App\Rparts;
 use Session;
+use Carbon\Carbon;
 
 class RepairController extends Controller
 {
@@ -59,15 +60,44 @@ class RepairController extends Controller
         $repair->grandTotal = '0.00';
         $repair->save();
 
-        $grandTotal = 0;
-        for($i=0; $i<count($request->itemName); $i++){
+        $invoice_no = Invoice::max('invoice_no');
+        $invoice_no++;
 
-            $total              = $request->quantity[$i] * $request->price[$i];
+
+        $invoice                = new Invoice;
+        $invoice->repair_id     = $repair->id;
+        $invoice->invoice_no    = $invoice_no;
+        $invoice->save();
+
+        // Stripping out null values from dynamic form
+
+        $itemNameArray  = $request->itemName;
+        $quantityArray  = $request->quantity;
+        $priceArray     = $request->price;
+
+        foreach($itemNameArray as $key => $value)          
+            if(empty($value)) 
+                unset($itemNameArray[$key]);
+
+        foreach($quantityArray as $key => $value)          
+            if(empty($value)) 
+                unset($quantityArray[$key]);
+
+        foreach($priceArray as $key => $value)          
+            if(empty($value)) 
+                unset($priceArray[$key]);
+
+        // Inserting rparts records
+        $grandTotal = 0;
+        for($i=0; $i<count($itemNameArray); $i++){
+
+            $total              = $quantityArray[$i] * $priceArray[$i];
+
             $rparts             = new Rparts;
             $rparts->repair_id  = $repair->id;
-            $rparts->name       = $request->itemName[$i];
-            $rparts->quantity   = $request->quantity[$i];
-            $rparts->price      = $request->price[$i];
+            $rparts->name       = $itemNameArray[$i];
+            $rparts->quantity   = $quantityArray[$i];
+            $rparts->price      = $priceArray[$i];
             $rparts->total      = $total;
             $rparts->save();
 
@@ -108,8 +138,9 @@ class RepairController extends Controller
     {
         $repair = Repair::find($id);
         $cars = Car::orderBy('plateNo', 'asc')->pluck('plateNo', 'id');
+        $invoice_no = $repair->invoice->invoice_no;
 
-        return view('repair.edit', compact('repair', 'cars'));
+        return view('repair.edit', compact('repair', 'cars', 'invoice_no'));
     }
 
     /**
@@ -135,6 +166,11 @@ class RepairController extends Controller
         $repair->status     = $request->status;
         $repair->grandTotal = '0.00';
         $repair->save();
+
+        $invoice                = Invoice::where('repair_id', $repair->id)->first();
+        $invoice->invoice_no    = $request->invoice_no;
+        $invoice->date          = Carbon::now();
+        $invoice->save();
 
         Rparts::where('repair_id', $id)->delete();
 
@@ -187,8 +223,13 @@ class RepairController extends Controller
      * @param  \App\Repair  $repair
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Repair $repair)
+    public function destroy($id)
     {
-        //
+        Repair::find($id)->delete();
+
+        Session::flash('success', 'Record Deleted!');
+
+        return redirect()->back();
+        return $id;
     }
 }

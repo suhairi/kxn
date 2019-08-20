@@ -31,13 +31,9 @@
 	    						<td>{{ $car->plateNo }}</td>
 	    						<td>{{ $car->model }}</td>
 	    						<td align="center">
-	    							<div class="inline">
+					                <div class="inline">
 		    							<a href="{{ route('car.edit', $car->id) }}" class="btn btn-primary">Edit</a>
-		    							<form action="{{ route('car.destroy', $car->id)}}" method="post">
-						                  @csrf
-						                  @method('DELETE')
-						                  <button class="btn btn-danger" type="submit">Delete</button>
-						                </form>
+		    							<a href="{{ route('car.destroy', $car->id)}}" data-method="DELETE" data-token="{{csrf_token()}}" data-confirm="Are you sure?"><button class="btn btn-danger">Delete</button></a>
 					                </div>
 	    						</td>
 	    				@endforeach

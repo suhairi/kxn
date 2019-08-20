@@ -28,44 +28,66 @@
 
 	    	<div class="card-body">
 	    		<div class="form-group row">
-	    			<table class="table table-striped">
-	    				<thead>
+	    			<table class="table table-borderless">
+	    				<thead class="thead-dark">
 	    					<th>Bil</th>
 	    					<th>Date</th>
-	    					<th>Grand Total</th>
+	    					<th>Grand Total (RM)</th>
 	    					<th>Status</th>
-	    					<th>Options</th>
-	    				</thead>
-	    				<tbody>
-	    					<div class="card-body">
-	    		<div class="form-group row">
-	    			<table class="table table-striped">
-	    				<thead>
-	    					<th>Bil</th>
-	    					<th>Date</th>
-	    					<th>Grand Total</th>
-	    					<th>Status</th>
+	    					<th>Details</th>
 	    					<th>Options</th>
 	    				</thead>
 	    				<tbody>
 	    					@foreach($repairs as $repair)
 	    					<tr>
 	    						<td>{{ $loop->iteration }}</td>
-	    						<td><a href="{{ route('repair.index', $repair->id) }}"> {{ Carbon\Carbon::parse($repair->dateIn)->format('d-m-Y') }}</a></td>
+	    						<td>
+	    							<a href="{{ route('repair.edit', $repair->id) }}"> {{ Carbon\Carbon::parse($repair->dateIn)->format('d-m-Y') }} 
+	    							- {{ Carbon\Carbon::parse($repair->dateIn)->format('D') }}</a>
+	    							<br />
+	    							{{ $repair->car->owner }} <br />
+	    							{{ $repair->car->plateNo }}
+	    						</td>
 	    						<td>{{ $repair->grandTotal }}</td>
-	    						<td>{{ $repair->status }}</td>
-	    						<td>&nbsp;</td>
+	    						<td>
+	    							@if($repair->status == 'PENDING')
+	    								<font color="red"><strong>{{ $repair->status }}</strong></font>
+    								@else
+    									<font color="green">{{ $repair->status }}</font>
+									@endif
+
+	    						</td>
+	    						<td>
+	    							<table class="table table-striped">
+	    								<thead>
+	    									<th>Bil</th>
+	    									<th>Item Name</th>
+	    									<th>Quantity</th>
+	    									<th>Price</th>
+	    									<th><strong>Total (RM)</strong></th>
+	    								</thead>
+	    								@foreach($repair->rparts as $rpart)
+	    									<tr>
+	    										<td>{{ $loop->iteration }}</td>
+	    										<td>{{ $rpart->name }}</td>
+	    										<td>{{ $rpart->quantity }}</td>
+	    										<td>{{ $rpart->price }}</td>
+	    										<td>{{ $rpart->total }}</td>
+	    									</tr>
+	    								@endforeach
+	    							</table>	    							
+	    						</td>
+	    						<td align="center">
+	    							<a href="{{ route('printouts.invoice', $repair->id) }}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print Invoice"></i></a>
+		    							<a href="#" class="btn btn-warning" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print D.O"></i></a>
+	    						</td>
 	    					</tr>
 	    					@endforeach
 	    				</tbody>
 	    			</table>
 
 
-	    	</div>
-	    				</tbody>
-	    			</table>
-
-
+	    		</div>
 	    	</div>
 
 	    </div>

@@ -15,11 +15,16 @@ class PrintoutsController extends Controller
     	$rparts = Rparts::where('repair_id', $id)->get();
 
     	$data['repair']	= $repair->first();
-    	$pages = round(count($data['repair']->rparts) / 9, 0);
+    	$pages = ceil(count($data['repair']->rparts) / 8);
 
-    	$pdf = PDF::loadView('printouts.invoice', compact('data', 'pages'))->setPaper('a4');
+    	$parts = $repair->rparts->toArray();
+    	// dd($parts);
+    	// dd(count($parts));
+    	// dd($pages);
+
+    	$pdf = PDF::loadView('printouts.invoice', compact('data', 'pages', 'parts'))->setPaper('a4');
     	return $pdf->download($repair->car->owner . ' - ' . $repair->car->plateNo . $repair->dateIn . '.pdf');
 
-    	return view('printouts.invoice', ['data' => $data]);
+    	return view('printouts.invoice', ['data' => $data, 'pages' => $pages, 'parts' => $parts]);
     }
 }
