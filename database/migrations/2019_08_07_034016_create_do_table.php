@@ -17,7 +17,7 @@ class CreateDoTable extends Migration
             $table->bigIncrements('id');
             $table->string('do_no');
             $table->integer('repair_id');
-            $table->dateTime('date')->nullable;
+            $table->dateTime('date')->nullable();
             // $table->timestamps();
         });
     }

@@ -26,7 +26,12 @@
 	                </div>
 	                <div class="form-group row">
 	                  	<div class="col-sm-6 mb-3 mb-sm-0">
-	                  		{{ Form::select("car_id", $cars, 'null', ['class' => 'form-control form-control-user', 'placeholder' => 'Select Customer', 'id' => 'car_id']) }}
+	                  		<select name="car_id" class="form-control form-control-user">
+	                  		@foreach($cars as $car)
+	                  			<option value="{{ $car->id}}">{{ $car->plateNo }} - {{ strtoupper($car->owner) }}</option> 
+	                  		@endforeach
+	                  		</select>
+	                  		
 	                  	</div>
 	                </div>
 	                <div class="form-group row">
@@ -52,7 +57,7 @@
 			            <tbody>
 
 			            </tbody>
-			           	</table>.
+			           	</table>
 			        <div class="form-group row">
 	                	<div class="col-sm-2 mb-3 mb-sm-0">
 	                		{{ Form::submit('Record Repair Details', ['class' => 'btn btn-primary btn-user btn-block']) }}

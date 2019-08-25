@@ -66,7 +66,7 @@
 		    							<a href="{{ route('repair.edit', $repair->id) }}" class="btn btn-primary">Edit</a>
 		    							<a href="{{ route('repair.destroy', $repair->id)}}" data-method="DELETE" data-token="{{csrf_token()}}" data-confirm="Are you sure?"><button class="btn btn-danger">Delete</button></a>
 		    							<a href="{{ route('printouts.invoice', $repair->id) }}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print Invoice"></i></a>
-		    							<a href="#" class="btn btn-warning" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print D.O"></i></a>
+		    							<a href="{{ route('printouts.do', $repair->id) }}" class="btn btn-warning" target="_blank"><i class="fa fa-print" aria-hidden="true" title="Print D.O"></i></a>
 					                </div>
 	    						</td>
 	    				@endforeach

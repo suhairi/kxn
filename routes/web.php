@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('auth.login');
-})->name('admin/home');
+})->name('admin.home');
 
 Auth::routes(['register' => false]);
 
@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 	// Inventory
 	Route::resource('inventory', 'InventoryController', ['except' => 'show']);
+	Route::get('inventory/search', 'InventoryController@search')->name('inventory.search');
 
 	//Stock
 	Route::get('/stocks', 'StockController@index')->name('stock.index');

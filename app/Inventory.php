@@ -26,4 +26,10 @@ class Inventory extends Model
     public function supplier() {
     	return $this->belongsTo('App\Supplier', 'supplier_id', 'id');
     }
+
+    public function getSupplierItems($supplier_id) {
+        $items = Inventory::where('supplier_id', $supplier_id)->groupBy('date')->get();
+
+        return $items;
+    }
 }

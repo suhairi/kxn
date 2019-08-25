@@ -36,7 +36,12 @@
 		    							<a href="{{ route('car.destroy', $car->id)}}" data-method="DELETE" data-token="{{csrf_token()}}" data-confirm="Are you sure?"><button class="btn btn-danger">Delete</button></a>
 					                </div>
 	    						</td>
+	    					</tr>
 	    				@endforeach
+	    				<tr>
+	    					<td colspan="5" align="center">{{ $cars->links() }}</td>
+	    				</tr>
+
 	    			</tbody>
 	    		</table>
 	    	</div>

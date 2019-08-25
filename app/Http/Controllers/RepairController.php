@@ -9,7 +9,7 @@ use App\Invoice;
 use App\Rparts;
 use Session;
 use Carbon\Carbon;
-use App\Do;
+use App\Dorder;
 
 class RepairController extends Controller
 {
@@ -33,6 +33,7 @@ class RepairController extends Controller
     public function create()
     {
         $cars = Car::orderBy('plateNo', 'asc')->pluck('plateNo', 'id');
+        $cars = Car::all();
         
 
         return view('repair.create')->with('cars', $cars);
@@ -69,10 +70,10 @@ class RepairController extends Controller
         $invoice->invoice_no    = $invoice_no;
         $invoice->save();
 
-        $do_no = Invoice::max('do_no');
+        $do_no = Dorder::max('do_no');
         $do_no++;
 
-        $do             = new Do;
+        $do             = new Dorder;
         $do->repair_id  = $repair->id;
         $do->do_no      = $do_no;
         $do->save();

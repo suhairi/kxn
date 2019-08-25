@@ -32,7 +32,7 @@ class Repair extends Model
     }
 
     public function do() {
-        return $this->hasOne('App\Do');
+        return $this->hasOne('App\Dorder');
     }
 
     

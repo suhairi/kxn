@@ -55,6 +55,7 @@
             <a class="collapse-item" href="{{ route('supplier.index')}}">List of Suppliers</a>
             <hr />
             <a class="collapse-item" href="{{ route('inventory.create')}}">New Inventory</a>
+            <a class="collapse-item" href="{{ route('inventory.search') }}">Search Inventory</a>
             <a class="collapse-item" href="{{ route('inventory.index') }}">List of Inventory</a>
             <hr />
             <a class="collapse-item" href="{{ route('stock.index')}}">List of Stock</a>

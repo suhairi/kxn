@@ -19,9 +19,24 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = Inventory::paginate(8);
 
-        return view('inventory.index')->with('inventories', $inventories);
+        $inventories = Inventory::all();
+        $inventories = $inventories->unique('supplier_id');
+
+        $collection = collect(['1' => 1, 'b' => 2]);
+
+        foreach($inventories as $inventory) {
+            $dates = Inventory::where()->get();
+            
+            $collection = $collection->push(['supplier_id' => $inventory->supplier_id]);
+        }
+
+ 
+        dd($collection);
+
+
+
+        return view('inventory.index', compact('supplier', 'inventories', 'items'));
     }
 
     /**
@@ -31,7 +46,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::orderBy('name')->pluck('name', 'id');
 
         return view('inventory.create', ['suppliers' => $suppliers]);
     }
@@ -48,10 +63,7 @@ class InventoryController extends Controller
 
         $validator = Validator::make($request->all(), [
             'supplier_id'   => 'required',
-            'date'          => 'required|date',
-            'name.0'       => 'required|min:3',
-            'quantity.0'   => 'required|integer',
-            'price.0'      => 'required|regex:/^\d*(\.\d{2})?$/'
+            'date'          => 'required|date'
         ]);
 
         if ($validator->fails()) {
@@ -60,24 +72,37 @@ class InventoryController extends Controller
                         ->withInput();
         }
 
-        for($i=0; $i<5; $i++){
+        $itemNameArray  = $request->itemName;
+        $quantityArray  = $request->quantity;
+        $priceArray     = $request->price;
 
-            if($i>0 && $request->name[$i] == "")
-                break;
+        foreach($itemNameArray as $key => $value)          
+            if(empty($value)) 
+                unset($itemNameArray[$key]);
 
-            $inventory = new Inventory;
+        foreach($quantityArray as $key => $value)          
+            if(empty($value)) 
+                unset($quantityArray[$key]);
+
+        foreach($priceArray as $key => $value)          
+            if(empty($value)) 
+                unset($priceArray[$key]);
+
+        for($i=0; $i<count($itemNameArray); $i++){
+
+            $inventory              = new Inventory;
             $inventory->supplier_id = $request->supplier_id;
             $inventory->date        = $request->date;
-            $inventory->name        = $request->name[$i];
-            $inventory->quantity    = $request->quantity[$i];
-            $inventory->price       = $request->price[$i];
+            $inventory->name        = $itemNameArray[$i];
+            $inventory->quantity    = $quantityArray[$i];
+            $inventory->price       = $priceArray[$i];
             $inventory->save();
-
-            $stock = new Stock;
-            $stock->name        = $request->name[$i];
-            $stock->quantity    = $request->quantity[$i];
-            $stock->save();
         }
+
+        // #########################
+        // Update stock here
+        // But in the next version
+        // #########################
 
         Session::flash('success', 'Inventory Record Success!');
         

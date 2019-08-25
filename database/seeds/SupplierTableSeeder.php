@@ -5,6 +5,7 @@ use App\Supplier;
 // use Faker\Generator as Faker;
 use App\Repair;
 use App\Car;
+use App\Dorder;
 
 class SupplierTableSeeder extends Seeder
 {
@@ -27,10 +28,17 @@ class SupplierTableSeeder extends Seeder
             'name'  => 'Suhairi Trading'
         ]);
 
+
+        $customers = ['Suhairi', 'Fadzil', 'MBAS', 'Nassarudin', 'Ali', 'Abu', 'Saad',
+                        'Said', 'Naijb', 'Abdullah', 'Mohd', 'Samy Vellu', 'Siti Nurhaliza',
+                        'Amy', 'Ijat', 'Musa', 'Sayuti', 'Rozaini', 'Ah Siang', 'Akib', 
+                        'Abdul Hamid', 'Halim', 'Zulkifli', 'Zulkiflee', 'Daud', 'Sulaiman',
+                        'Adam', 'Idris', 'Nuh', 'Hud', 'Salleh', 'Ibrahim', 'Lut', 'Ismail',
+                        'Ishak', 'Yaakob', 'Yusuf', 'Ayub'];
         for($i=0; $i<25; $i++) {
 
             Car::create([
-                'owner'     => $faker->name,
+                'owner'     => $faker->unique()->randomElement($customers),
                 'plateNo'   => $faker->randomElement(['K', 'P', 'R', 'C', 'A', 'B']) . 
         $faker->randomElement(['A', 'B', 'B', 'D', 'E', 'F', 'G']) . 
         $faker->randomElement(['N', 'M', 'A', 'P', 'Q', 'T', 'C']) . rand(50, 9000),

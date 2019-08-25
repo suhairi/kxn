@@ -16,7 +16,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::all()->sortBy('owner');
+        $cars = Car::orderBy('owner', 'asc')->paginate(10);
         // $cars = $cars->orderBy('owner', 'asc');
      
         return view('car.index')->with('cars', $cars);
