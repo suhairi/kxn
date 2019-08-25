@@ -20,23 +20,9 @@ class InventoryController extends Controller
     public function index()
     {
 
-        $inventories = Inventory::all();
-        $inventories = $inventories->unique('supplier_id');
+        $inventories = Inventory::distinct()->get('supplier_id');
 
-        $collection = collect(['1' => 1, 'b' => 2]);
-
-        foreach($inventories as $inventory) {
-            $dates = Inventory::where()->get();
-            
-            $collection = $collection->push(['supplier_id' => $inventory->supplier_id]);
-        }
-
- 
-        dd($collection);
-
-
-
-        return view('inventory.index', compact('supplier', 'inventories', 'items'));
+        return view('inventory.index', compact('inventories'));
     }
 
     /**
