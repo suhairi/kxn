@@ -28,9 +28,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::resource('supplier', 'SupplierController');
 
 	// Inventory
-	Route::resource('inventory', 'InventoryController');
-	Route::get('inventory/search', 'InventoryController@search')->name('inventory.search');
-	// Route::post('inventory/search', 'InventoryController@result')->name('inventory.searchResult');
+	Route::resource('/inventory', 'InventoryController');
+
+
 
 	//Stock
 	Route::get('/stocks', 'StockController@index')->name('stock.index');
@@ -40,7 +40,8 @@ Route::group(['middleware' => 'auth'], function() {
 
 	//Search
 	Route::get('/search', 'SearchController@index')->name('search.index');
-	Route::post('/search', 'SearchController@show')->name('search.search');
+	Route::get('/search/inventory', 'SearchController@inventory')->name('search.inventory');
+	Route::post('/search/inventory', 'SearchController@inventoryResult')->name('search.inventory.result');
 
 	// Printouts
 	Route::get('/printouts/invoice/{id}', 'PrintoutsController@invoice')->name('printouts.invoice');

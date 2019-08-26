@@ -27,8 +27,9 @@
 	                <div class="form-group row">
 	                  	<div class="col-sm-6 mb-3 mb-sm-0">
 	                  		<select name="car_id" class="form-control form-control-user">
+	                  			<option value="">Select Repair Car</option>
 	                  		@foreach($cars as $car)
-	                  			<option value="{{ $car->id}}">{{ $car->plateNo }} - {{ strtoupper($car->owner) }}</option> 
+	                  			<option value="{{ $car->id}}">{{ $car->plateNo }} - {{ strtoupper($car->owner) }}</option>
 	                  		@endforeach
 	                  		</select>
 	                  		

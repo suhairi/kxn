@@ -7,6 +7,8 @@ use App\Repair;
 use App\Car;
 use Session;
 use Validator;
+use App\Supplier;
+use App\Inventory;
 
 class SearchController extends Controller
 {
@@ -40,6 +42,26 @@ class SearchController extends Controller
     	$repairs = Repair::where('car_id', $car->id)->get();
 
     	return view('search.show')->with('repairs', $repairs);
+    }
+
+    public function inventory() {
+
+        $suppliers = Supplier::pluck('name', 'id');
+
+        return view('search.inventory', compact('suppliers'));
+    }
+
+    public function inventoryResult(Request $request) {
+
+        $inventories = Inventory::where('supplier_id', $request->supplier_id)->get();
+
+
+        if(empty($inventories->count())) {
+            Session::flash('failed', 'Inventory with that Supplier not found!');
+            return redirect()->back();
+        }
+
+        dd($inventories);
     }
 
 
