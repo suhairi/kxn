@@ -44,14 +44,13 @@ class SupplierTableSeeder extends Seeder
                 'plateNo'   => $faker->randomElement(['K', 'P', 'R', 'C', 'A', 'B']) . 
         $faker->randomElement(['A', 'B', 'B', 'D', 'E', 'F', 'G']) . 
         $faker->randomElement(['N', 'M', 'A', 'P', 'Q', 'T', 'C']) . rand(50, 9000),
-                'model'     => $faker->randomElement([
-                                'Honda Civic',
-                                'Proton Iswara',
-                                'Honda HRV',
-                                'Honda CRV',
-                                'Toyota Almera',
-                                'Kia Forte',
-                                'Volvo S60',
+                'model'     => $faker->randomElement([                                
+                                'Proton Iswara', 'Proton Saga', 'Proton Preve', 'Proton Perdana', 'Proton x70', 'Proton x50',
+                                'Honda HRV', 'Honda CRV', 'Honda City', 'Honda BRV', 'Honda Civic', 'Honda Civic',
+                                'Toyota Vios', 'Toyota Avanza', 'Toyota Rush', 'Toyota Innova',
+                                'Kia Forte', 'Kia Sportage', 'Optima GT', 'Kia Sorento', 'Grand Carnival',
+                                'Volvo S60 T6', 'Volvo V40 T5', 'Volvo S90 T8', 'Volvo XC60 T8',
+                                
                                 ]),
             ]);
         }
