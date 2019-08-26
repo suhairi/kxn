@@ -157,4 +157,17 @@ class InventoryController extends Controller
 
         return redirect()->back();
     }
+
+    public function search() {
+
+        return 'here';
+
+        $suppliers = Supplier::pluck('name', 'id');
+
+        return view('inventory.search', compact('suppliers'));
+    }
+
+    public function searchResult() {
+
+    }
 }

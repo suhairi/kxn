@@ -34,7 +34,8 @@ class SupplierTableSeeder extends Seeder
                         'Amy', 'Ijat', 'Musa', 'Sayuti', 'Rozaini', 'Ah Siang', 'Akib', 
                         'Abdul Hamid', 'Halim', 'Zulkifli', 'Zulkiflee', 'Daud', 'Sulaiman',
                         'Adam', 'Idris', 'Nuh', 'Hud', 'Salleh', 'Ibrahim', 'Lut', 'Ismail',
-                        'Ishak', 'Yaakob', 'Yusuf', 'Ayub'];
+                        'Ishak', 'Yaakob', 'Yusuf', 'Ayub', 'Isa', 'Illyas', 'Ilyasa',
+                        'sumayyah', 'amran', 'imran'];
         for($i=0; $i<25; $i++) {
 
             Car::create([

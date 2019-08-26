@@ -28,8 +28,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::resource('supplier', 'SupplierController');
 
 	// Inventory
-	Route::resource('inventory', 'InventoryController', ['except' => 'show']);
+	Route::resource('inventory', 'InventoryController');
 	Route::get('inventory/search', 'InventoryController@search')->name('inventory.search');
+	// Route::post('inventory/search', 'InventoryController@result')->name('inventory.searchResult');
 
 	//Stock
 	Route::get('/stocks', 'StockController@index')->name('stock.index');

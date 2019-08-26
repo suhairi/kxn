@@ -39,7 +39,7 @@
 											
 											<thead class="thead-dark">
 												<tr>
-													<td colspan="4"><strong>{{ $loop->iteration }} - {{ Carbon\Carbon::parse($date->date)->format('d-m-Y') }}</strong></td>
+													<td colspan="4"><strong>{{ Carbon\Carbon::parse($date->date)->format('d-m-Y') }}</strong></td>
 												</tr>
 												<tr>
 													<th>Bil</th>
