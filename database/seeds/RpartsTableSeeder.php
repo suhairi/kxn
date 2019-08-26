@@ -14,6 +14,7 @@ class RpartsTableSeeder extends Seeder
     {
         Car::create([
         	'owner'		=> 'Suhairi Abdul Hamid',
+            'address'   => 'No 17, Taman Seri Impian, Jalan Kuala Ketil, 08000 Sungai Petani, Kedah Darul Aman.',
         	'plateNo'	=> 'PHQ2876',
         	'model'		=> 'Proton Iswara'
         ]);

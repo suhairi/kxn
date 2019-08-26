@@ -16,6 +16,7 @@ class CreateCarTable extends Migration
         Schema::create('car', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('owner');
+            $table->text('address');
             $table->string('plateNo');
             $table->string('model');
             // $table->timestamps();

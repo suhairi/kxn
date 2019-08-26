@@ -46,14 +46,19 @@ class SearchController extends Controller
 
     public function inventory() {
 
-        $suppliers = Supplier::pluck('name', 'id');
+        $suppliers      = Supplier::pluck('name', 'id');
+        $inventories    = collect([]);
 
-        return view('search.inventory', compact('suppliers'));
+        // dd($inventories);
+
+        return view('search.inventory', compact('suppliers', 'inventories'));
     }
 
     public function inventoryResult(Request $request) {
 
-        $inventories = Inventory::where('supplier_id', $request->supplier_id)->get();
+        $supplier       = Supplier::find($request->supplier_id);
+        $suppliers      = Supplier::pluck('name', 'id');
+        $inventories    = Inventory::where('supplier_id', $request->supplier_id)->groupBy('date')->get();
 
 
         if(empty($inventories->count())) {
@@ -61,7 +66,12 @@ class SearchController extends Controller
             return redirect()->back();
         }
 
-        dd($inventories);
+        // dd($inventories);
+
+        return view('search.inventory', compact('supplier', 'suppliers', 'inventories'));
+
+        
+
     }
 
 

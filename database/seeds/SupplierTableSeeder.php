@@ -20,7 +20,7 @@ class SupplierTableSeeder extends Seeder
 
 	    for($i = 0; $i < 15; $i++) {
 	        Supplier::create([
-	            'name' => $faker->name
+	            'name' => $faker->unique()->randomElement(['Cemerlang ', 'Maju Jaya ', 'AZRB ', 'Elsoft ', 'Scientex ', 'Gading ', 'Lee Hin ', 'Scicom ', 'Ah Sin ', 'GHL ', 'Heveaboard ', 'Uchiha ', 'Naruto ', 'Apex ', 'Wah Lee ', 'QL ', 'Muthusamy ', 'Perkasa ', 'Steady Wheel ', 'Avajaya ', 'Lan Hoe ', 'Guan Hoe ']) . ' ' . $faker->randomElement(['Trading', 'Sdn. Bhd.', 'Enterprise', 'Resources'])
 	        ]);
 	    }
 
@@ -29,7 +29,7 @@ class SupplierTableSeeder extends Seeder
         ]);
 
 
-        $customers = ['Suhairi', 'Fadzil', 'MBAS', 'Nassarudin', 'Ali', 'Abu', 'Saad',
+        $customers = ['Suhairi', 'Fadzil', 'Mat Yan', 'MBAS', 'Nassarudin', 'Ali', 'Abu', 'Saad',
                         'Said', 'Naijb', 'Abdullah', 'Mohd', 'Samy Vellu', 'Siti Nurhaliza',
                         'Amy', 'Ijat', 'Musa', 'Sayuti', 'Rozaini', 'Ah Siang', 'Akib', 
                         'Abdul Hamid', 'Halim', 'Zulkifli', 'Zulkiflee', 'Daud', 'Sulaiman',
@@ -40,6 +40,7 @@ class SupplierTableSeeder extends Seeder
 
             Car::create([
                 'owner'     => $faker->unique()->randomElement($customers),
+                'address'   => 'No. ' . rand(20,250) . ' ' . $faker->randomElement(['Taman ', 'Kg. ']) . $faker->randomElement(['Kemajuan', 'Wira', 'Bunga Raya', 'Inang', 'Inai', 'Gunung Sali', 'Seri Impian', 'Seri Gading', 'Putra']) . ', ' . $faker->randomElement(['Jalan ', 'Lorong ']) . $faker->randomElement(['Alor Melintang', 'Alor Gajus', 'Putra', 'Sultanah', 'Sultanah Tambahan', 'Merdeka']) . ', ' . $faker->randomElement(['05000 ', '05150 ', '05300 ', '05460 ', '05350 ', '05250 ', '05600 ', '06000 ', '06570 ', '05990 ']) . $faker->randomElement(['Alor Setar', 'Sungai Petani', 'Yan', 'Kuala Kedah', 'Simpang Kuala']) . ', ' . 'Kedah Darul Aman.', 
                 'plateNo'   => $faker->randomElement(['K', 'P', 'R', 'C', 'A', 'B']) . 
         $faker->randomElement(['A', 'B', 'B', 'D', 'E', 'F', 'G']) . 
         $faker->randomElement(['N', 'M', 'A', 'P', 'Q', 'T', 'C']) . rand(50, 9000),
@@ -54,6 +55,8 @@ class SupplierTableSeeder extends Seeder
                                 ]),
             ]);
         }
+
+
 
     }
 }

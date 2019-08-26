@@ -25,6 +25,13 @@
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <textarea name="address" class="form-control form-control-user" placeholder="Owner's Address" value="{{ old('address') }}"></textarea>
+                    </div>
+                </div>
+                
+
+                <div class="form-group row">
                   	<div class="col-sm-6 mb-3 mb-sm-0">
                     	<input type="text" class="form-control form-control-user" name="plateNo" placeholder="Plate No" value="{{ old('plateNo') }}">
                   	</div>

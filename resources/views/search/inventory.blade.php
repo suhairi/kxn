@@ -14,6 +14,7 @@
 	    		@include('layouts._ifError')
 	    		@include('layouts._ifSuccess')
 	    		@include('layouts._ifFailed')
+
 	    		{{ Form::open(['route' => 'search.inventory', 'method' => 'POST']) }}
 	    			<div class="form-group row">
 	                  	<div class="col-sm-6 mb-3 mb-sm-0">
@@ -27,6 +28,47 @@
 	                   	</div>
 	                </div>
 	    		{{ Form::close() }}
+
+	    		@if(!empty($inventories->count()))
+	    			<hr />
+	    			<table class="table table-bordered">
+	    				<thead>
+	    					<tr>
+	    						<th>Search Result : {{ $supplier->name }}</th>
+	    					</tr>
+	    				</thead>
+	    			@forelse($inventories as $inventory)
+	    				<?php $items = App\Inventory::where('date', $inventory->date)->where('supplier_id', $inventory->supplier_id)->get(); ?>
+	    				<tbody>
+	    					<table class="table table-striped table bordered">
+	    						<thead>
+	    						<tr>
+	    							<th>{{ Carbon\Carbon::parse($inventory->date)->format('d-m-Y') }}</th>
+	    						</tr>
+	    						</thead>
+	    						<tbody>
+	    							<tr>
+	    								<th>Bill</th>
+	    								<th>Item Name</th>
+	    								<th>Quantity</th>
+	    								<th>Price (RM)</th>
+	    							</tr>
+	    							@foreach($items as $item)
+	    								<tr>
+		    								<td>{{ $loop->iteration }}</td>
+		    								<td>{{ $item->name }}</td>
+		    								<td>{{ $item->quantity }}</td>
+		    								<td>{{ $item->price }}</td>
+	    								</tr>
+	    							@endforeach
+	    						</tbody>
+	    					</table>
+	    				</tbody>
+    				@empty
+    					<li>No Result</li>
+	    			@endforelse
+	    			</table>
+	    		@endif
 
 	    	</div>
 

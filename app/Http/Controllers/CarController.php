@@ -41,9 +41,10 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'owner' => 'required|max:255',
-            'plateNo' => 'required|unique:car,plateNo',
-            'model' => 'nullable',
+            'owner'     => 'required|max:255',
+            'address'   => 'max:255',
+            'plateNo'   => 'required|unique:car,plateNo',
+            'model'     => 'nullable',
 
         ]);
 
@@ -57,6 +58,7 @@ class CarController extends Controller
 
         Car::create([
             'owner'     => $request->owner,
+            'address'   => $request->owner,
             'plateNo'   => $request->plateNo,
             'model'     => $request->model,
         ]);
@@ -102,9 +104,10 @@ class CarController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'owner' => 'required|max:255',
-            'plateNo' => 'required',
-            'model' => 'nullable',
+            'owner'     => 'required|max:255',
+            'address'   => 'max:255',
+            'plateNo'   => 'required',
+            'model'     => 'nullable',
 
         ]);
 
@@ -116,9 +119,10 @@ class CarController extends Controller
 
         $car = Car::find($id);
 
-        $car->owner = $request->owner;
-        $car->plateNo = $request->plateNo;
-        $car->model = $request->model;
+        $car->owner     = $request->owner;
+        $car->address   = $request->address;
+        $car->plateNo   = $request->plateNo;
+        $car->model     = $request->model;
         $car->save();
 
         Session::flash('success', 'Success!');

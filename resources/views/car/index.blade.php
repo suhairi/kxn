@@ -13,13 +13,13 @@
 	    	<div class="card-body">
 	    		@include('layouts._ifSuccess')
 	    		
-	    		<table class="table table-bordered">
-	    			<thead>
+	    		<table class="table table-bordered table-striped">
+	    			<thead class="thead-dark">
 	    				<tr>
 	    					<th>Bil</th>
 	    					<th>Owners' Name</th>
-	    					<th>Plate No</th>
-	    					<th>Car Model/Make</th>
+	    					<th>Plate No / Car Model</th>
+	    					<th>Address</th>
 	    					<th>Options</th>
 	    				</tr>
 	    			</thead>
@@ -27,9 +27,13 @@
 	    				@foreach($cars as $car)
 	    					<tr>
 	    						<td>{{ $loop->iteration }}</td>
-	    						<td>{{ $car->owner }}</td>
-	    						<td>{{ $car->plateNo }}</td>
-	    						<td>{{ $car->model }}</td>
+	    						<td><strong>{{ $car->owner }}</strong></td>
+	    						<td>
+	    							<strong>{{ $car->plateNo }}</strong> <br />
+	    							{{ $car->model }}
+
+	    						</td>
+	    						<td>{{ $car->address }}</td>
 	    						<td align="center">
 					                <div class="inline">
 		    							<a href="{{ route('car.edit', $car->id) }}" class="btn btn-primary">Edit</a>

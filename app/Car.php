@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
 	protected $table	= 'car';
-    protected $fillable = ['owner', 'plateNo', 'model'];
+    protected $fillable = ['owner', 'address', 'plateNo', 'model'];
 
     public function setOwnerAttribute($value) {
     	$this->attributes['owner'] = ucwords($value);
